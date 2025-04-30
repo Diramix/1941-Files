@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, render_template
+from flask import Flask, send_from_directory, render_template, request, jsonify
 import os
 import json
 
@@ -30,6 +30,25 @@ def list_files():
 @app.route("/<filename>")
 def serve_file(filename):
     return send_from_directory(DIRECTORY, filename)
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    if "file" not in request.files:
+        return jsonify({"success": False, "message": "File not found"})
+    
+    file = request.files["file"]
+    if file.filename == "":
+        return jsonify({"success": False, "message": "No file to download"})
+    
+    # Путь к директории для сохранения файла
+    filepath = os.path.join(DIRECTORY, file.filename)
+
+    # Проверка на существование файла с таким же именем
+    if os.path.exists(filepath):
+        return jsonify({"success": False, "message": "A file with this name already exists"})
+    
+    file.save(filepath)
+    return jsonify({"success": True})
 
 if __name__ == "__main__":
     print(f"Serving at http://0.0.0.0:{PORT}")

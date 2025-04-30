@@ -1,0 +1,138 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #16181E;
+    margin: 0;
+}
+
+.title_1941 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 800;
+    color: #fff;
+    background-color: #292C36;
+    border-radius: 0 0 10px 10px;
+}
+
+.main_container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    gap: 10px;
+}
+
+.dropxout {
+    height: calc(100vh - 124px);
+    width: 400px;
+    border-style: dashed;
+    border-color: #fff5;
+    border-width: 5px;
+    border-radius: 10px;
+    background-color: #292C3650;
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.dropxout:hover {
+    background-color: #292C36;
+    cursor: pointer;
+}
+
+.dropxout.dragover {
+    border-color: #fff;
+    background-color: #3E424C;
+}
+
+.files_container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 134px);
+    width: 100%;
+    background-color: #292C36;
+    border-radius: 10px;
+    border-color: #363944;
+    border-style: solid;
+    border-width: 0;
+    padding: 10px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+ul::-webkit-scrollbar-track {
+    background: #1E2027;
+    border-radius: 4px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: #42F693;
+    border-radius: 4px;
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+    background: #34c97b;
+}
+
+li {
+    background-color: #3E424C;
+    color: #fff;
+    height: 50px;
+    min-height: 50px;
+    border-radius: 10px;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #3261E2;
+}
+
+.files_container * {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    gap: 5px;
+}
+
+#progress-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #292C36;
+    height: 24px;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0;
+    background: #42F693;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+}
