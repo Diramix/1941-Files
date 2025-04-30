@@ -1,17 +1,36 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, render_template
 import os
+import json
 
 app = Flask(__name__)
 
-PORT = 1941
-DIRECTORY = "assets"
+# Загрузка конфигурации из файла config.json
+def load_config():
+    with open('config.json', 'r') as config_file:
+        config = json.load(config_file)
+    return config
+
+# Загрузка конфигурации
+config = load_config()
+
+PORT = config.get("port", 1941)  # Порт из config.json, если не указан — по умолчанию 1941
+DIRECTORY = config.get("directory", "assets")  # Директория из config.json, если не указана — по умолчанию "assets"
+
+# Проверка и создание директории, если она не существует
+if not os.path.exists(DIRECTORY):
+    os.makedirs(DIRECTORY)
+    print(f"Directory '{DIRECTORY}' created.")
+
+@app.route("/")
+def list_files():
+    files = os.listdir(DIRECTORY)
+    files = [f for f in files if os.path.isfile(os.path.join(DIRECTORY, f))]
+    return render_template("index.html", files=files)
 
 @app.route("/<filename>")
 def serve_file(filename):
-    # Путь к файлу в директории assets
     return send_from_directory(DIRECTORY, filename)
 
 if __name__ == "__main__":
-    # Не меняем текущую директорию
     print(f"Serving at http://0.0.0.0:{PORT}")
     app.run(host="0.0.0.0", port=PORT)
