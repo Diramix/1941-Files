@@ -1,6 +1,14 @@
+:root {
+    --main-background: #16181E;
+    --light-element: #292C36;
+    --dropxout: #181B21;
+    --button-bg: #3E424C;
+    --progress-bar: #42F693;
+}
+
 body {
     font-family: 'Noto Sans', sans-serif;
-    background-color: #16181E;
+    background-color: var(--main-background);
     margin: 0;
 }
 
@@ -14,7 +22,7 @@ body {
     font-size: 35px;
     font-weight: 800;
     color: #fff;
-    background-color: #292C36;
+    background-color: var(--light-element);
     border-radius: 0 0 10px 10px;
 }
 
@@ -32,7 +40,7 @@ body {
     border-color: #fff5;
     border-width: 5px;
     border-radius: 10px;
-    background-color: #292C3650;
+    background-color: var(--dropxout);
     color: #fff;
     text-align: center;
     justify-content: center;
@@ -41,13 +49,13 @@ body {
 }
 
 .dropxout:hover {
-    background-color: #292C36;
+    background-color: var(--light-element);
     cursor: pointer;
 }
 
 .dropxout.dragover {
     border-color: #fff;
-    background-color: #3E424C;
+    background-color: var();
 }
 
 .files_container {
@@ -55,7 +63,7 @@ body {
     flex-direction: column;
     height: calc(100vh - 134px);
     width: 100%;
-    background-color: #292C36;
+    background-color: var(--light-element);
     border-radius: 10px;
     border-color: #363944;
     border-style: solid;
@@ -75,22 +83,17 @@ ul::-webkit-scrollbar {
     width: 8px;
 }
 
-ul::-webkit-scrollbar-track {
-    background: #1E2027;
-    border-radius: 4px;
-}
-
 ul::-webkit-scrollbar-thumb {
-    background: #42F693;
+    background: var(--progress-bar);
     border-radius: 4px;
 }
 
 ul::-webkit-scrollbar-thumb:hover {
-    background: #34c97b;
+    filter: brightness(0.8);
 }
 
 li {
-    background-color: #3E424C;
+    background-color: var(--button-bg);
     color: #fff;
     height: 50px;
     min-height: 50px;
@@ -122,14 +125,14 @@ li:hover {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #292C36;
+    background: var(--light-element);
     height: 24px;
 }
 
 #progress-bar {
     height: 100%;
     width: 0;
-    background: #42F693;
+    background: var(--progress-bar);
     display: flex;
     align-items: center;
     justify-content: center;

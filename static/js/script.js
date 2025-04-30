@@ -44,15 +44,15 @@ function uploadFile(file) {
 
     xhr.onload = function () {
         if (xhr.status === 200) {
-            progressBar.textContent = 'Готово';
+            progressBar.textContent = 'Done';
             setTimeout(() => location.reload(), 1000);
         } else {
-            progressBar.textContent = 'Ошибка';
+            progressBar.textContent = 'Error';
         }
     };
 
     xhr.onerror = function () {
-        progressBar.textContent = 'Ошибка';
+        progressBar.textContent = 'Error';
     };
 
     xhr.send(formData);
