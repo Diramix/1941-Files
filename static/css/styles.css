@@ -6,74 +6,89 @@
     --progress-bar: #42F693;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+html,
 body {
+    margin: 0;
+    padding: 0;
+    height: 100dvh;
+    overflow: hidden;
     font-family: 'Noto Sans', sans-serif;
     background-color: var(--main-background);
-    margin: 0;
+}
+
+body>.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .title_1941 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
     width: 100%;
+    height: 60px;
     text-align: center;
     font-size: 35px;
     font-weight: 800;
     color: #fff;
     background-color: var(--light-element);
     border-radius: 0 0 10px 10px;
+    flex-shrink: 0;
 }
 
 .main_container {
     display: flex;
+    flex: 1;
     flex-direction: row;
-    margin: 20px;
     gap: 10px;
+    padding: 20px;
+    overflow: hidden;
 }
 
 .dropxout {
-    height: calc(100vh - 124px);
-    width: 400px;
-    border-style: dashed;
-    border-color: #fff5;
-    border-width: 5px;
-    border-radius: 10px;
-    background-color: var(--dropxout);
-    color: #fff;
-    text-align: center;
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
+    width: 20%;
+    height: 100%;
+    background-color: var(--dropxout);
+    color: #fff;
+    border: 5px dashed #fff5;
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .dropxout:hover {
     background-color: var(--light-element);
-    cursor: pointer;
 }
 
 .dropxout.dragover {
     border-color: #fff;
-    background-color: var();
+    background-color: var(--light-element);
 }
 
 .files_container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 134px);
-    width: 100%;
+    flex: 1;
     background-color: var(--light-element);
+    border: 1px solid #363944;
     border-radius: 10px;
-    border-color: #363944;
-    border-style: solid;
-    border-width: 0;
     padding: 10px;
+    overflow: hidden;
 }
 
 ul {
-    padding: 0;
     margin: 0;
+    padding: 0;
     height: 100%;
     overflow-y: auto;
     border-radius: 10px;
@@ -84,7 +99,7 @@ ul::-webkit-scrollbar {
 }
 
 ul::-webkit-scrollbar-thumb {
-    background: var(--progress-bar);
+    background-color: var(--progress-bar);
     border-radius: 4px;
 }
 
@@ -93,19 +108,22 @@ ul::-webkit-scrollbar-thumb:hover {
 }
 
 li {
-    background-color: var(--button-bg);
-    color: #fff;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 50px;
     min-height: 50px;
+    margin-right: 55px;
+    padding-right: 10px;
+    background-color: var(--button-bg);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
     border-radius: 10px;
-    list-style-type: none;
-    justify-content: center;
-    align-items: center;
+    list-style: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    position: relative;
-    padding-right: 10px;
-    margin-right: 55px;
 }
 
 li:hover {
@@ -113,19 +131,19 @@ li:hover {
 }
 
 .copy-btn {
-    background-color: var(--button-bg);
-    width: 50px;
-    height: 100%;
     position: absolute;
     top: 0;
     right: -55px;
+    width: 50px;
+    height: 100%;
+    background-color: var(--button-bg);
+    color: #fff;
     border: none;
-    color: white;
     border-radius: 10px;
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
@@ -148,21 +166,18 @@ li:hover {
 }
 
 #progress-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    background: var(--light-element);
     height: 24px;
+    background-color: var(--light-element);
 }
 
 #progress-bar {
-    height: 100%;
     width: 0;
-    background: var(--progress-bar);
+    height: 100%;
+    background-color: var(--progress-bar);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff;
     font-size: 14px;
 }

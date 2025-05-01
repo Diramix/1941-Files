@@ -5,33 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1941 Files</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
-    <div class="title_1941">1941 Files</div>
-    <div class="main_container">
-        <div class="dropxout" id="dropArea">Drag and drop the file or click</div>
-        <input type="file" id="fileInput" style="display: none;">
-        <div class="files_container">
-            <ul>
-                {% for file in files %}
-                <li>
-                    <a href="{{ url_for('serve_file', filename=file) }}" target="_blank">{{ file }}</a>
-                    <button class="copy-btn" data-filename="{{ file }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
-                            <path
-                                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z" />
-                        </svg>
-                    </button>
-                </li>
-                {% endfor %}
-            </ul>
+    <div class="wrapper">
+        <div class="title_1941">1941 Files</div>
+        <div class="main_container">
+            <div class="dropxout" id="dropArea">Drag and drop the file or click</div>
+            <input type="file" id="fileInput" style="display: none;">
+            <div class="files_container">
+                <ul>
+                    {% for file in files %}
+                    <li>
+                        <a href="{{ url_for('serve_file', filename=file) }}" target="_blank">{{ file }}</a>
+                        <button class="copy-btn" data-filename="{{ file }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z" />
+                            </svg>
+                        </button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
-    <div id="progress-container">
-        <div id="progress-bar">0%</div>
+        <div id="progress-container">
+            <div id="progress-bar">0%</div>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
