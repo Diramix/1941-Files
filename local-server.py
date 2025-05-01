@@ -4,19 +4,19 @@ import json
 
 app = Flask(__name__)
 
-# Загрузка конфигурации из файла config.json
 def load_config():
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
     return config
 
-# Загрузка конфигурации
 config = load_config()
 
-PORT = config.get("port", 1941)  # Порт из config.json, если не указан — по умолчанию 1941
-DIRECTORY = config.get("directory", "assets")  # Директория из config.json, если не указана — по умолчанию "assets"
+PORT = config.get("port", 1941)
+directory_raw = config.get("directory", "assets")
 
-# Проверка и создание директории, если она не существует
+# Подстановка переменных окружения, если они есть в пути
+DIRECTORY = os.path.expandvars(directory_raw)
+
 if not os.path.exists(DIRECTORY):
     os.makedirs(DIRECTORY)
     print(f"Directory '{DIRECTORY}' created.")
@@ -35,18 +35,16 @@ def serve_file(filename):
 def upload_file():
     if "file" not in request.files:
         return jsonify({"success": False, "message": "File not found"})
-    
+
     file = request.files["file"]
     if file.filename == "":
         return jsonify({"success": False, "message": "No file to download"})
-    
-    # Путь к директории для сохранения файла
+
     filepath = os.path.join(DIRECTORY, file.filename)
 
-    # Проверка на существование файла с таким же именем
     if os.path.exists(filepath):
         return jsonify({"success": False, "message": "A file with this name already exists"})
-    
+
     file.save(filepath)
     return jsonify({"success": True})
 

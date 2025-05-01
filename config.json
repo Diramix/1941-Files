@@ -1,4 +1,4 @@
 {
     "port": 1941,
-    "directory": "assets"
+    "directory": "%LOCALAPPDATA%\\local-server"
 }
