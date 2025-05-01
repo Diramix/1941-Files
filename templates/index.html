@@ -7,12 +7,15 @@
     <title>1941 Files</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='icons/1941.ico') }}" type="image/x-icon">
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="title_1941">1941 Files</div>
+        <header>
+            <img src="/static/icons/logo.ico" class="icon_1941">
+            <div class="title_1941">1941 Files</div>
+        </header>
         <div class="main_container">
             <div class="dropxout" id="dropArea">Drag and drop the file or click</div>
             <input type="file" id="fileInput" style="display: none;">
