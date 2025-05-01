@@ -64,10 +64,17 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const filename = button.getAttribute('data-filename');
             const url = origin + '/' + filename;
-            navigator.clipboard.writeText(url).then(() => {
-                button.classList.add('copied');
-                setTimeout(() => button.classList.remove('copied'), 1500);
-            });
+
+            // Создаем временный элемент для копирования
+            const textArea = document.createElement('textarea');
+            textArea.value = url;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            button.classList.add('copied');
+            setTimeout(() => button.classList.remove('copied'), 1500);
         });
     });
 });
