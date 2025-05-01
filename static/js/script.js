@@ -57,3 +57,17 @@ function uploadFile(file) {
 
     xhr.send(formData);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const origin = window.location.origin;
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const filename = button.getAttribute('data-filename');
+            const url = origin + '/' + filename;
+            navigator.clipboard.writeText(url).then(() => {
+                button.classList.add('copied');
+                setTimeout(() => button.classList.remove('copied'), 1500);
+            });
+        });
+    });
+});

@@ -99,15 +99,42 @@ li {
     min-height: 50px;
     border-radius: 10px;
     list-style-type: none;
-    display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: relative;
+    padding-right: 10px;
+    margin-right: 55px;
 }
 
 li:hover {
     background-color: #3261E2;
+}
+
+.copy-btn {
+    background-color: var(--button-bg);
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: -55px;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #3261E2;
+}
+
+.copy-btn.copied {
+    background-color: green !important;
 }
 
 .files_container * {
