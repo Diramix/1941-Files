@@ -184,6 +184,6 @@ li:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--light-element);
     font-size: 14px;
 }
