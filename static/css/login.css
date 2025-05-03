@@ -1,0 +1,92 @@
+:root {
+    --main-background: #16181E;
+    --light-element: #292C36;
+    --dropxout: #181B21;
+    --button-bg: #3E424C;
+    --progress-bar: #42F693;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100dvh;
+    overflow: hidden;
+    font-family: 'Noto Sans', sans-serif;
+    background-color: var(--main-background);
+}
+
+body>.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    font-size: 35px;
+    font-weight: 800;
+    color: #fff;
+    background-color: var(--light-element);
+    border-radius: 0 0 10px 10px;
+    flex-shrink: 0;
+}
+
+.icon_1941 {
+    position: absolute;
+    left: 7px;
+    height: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+[for="username"],
+[for="password"] {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#username,
+#password {
+    background-color: var(--light-element);
+    border: 2px solid var(--button-bg);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 16px;
+    color: #fff;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#username:focus,
+#password:focus {
+    outline: none;
+    border-color: var(--progress-bar);
+}
+
+[value="Login"] {
+    border: 2px solid var(--accent-color);
+    background-color: #00f;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 25px;
+    border-radius: 8px;
+}

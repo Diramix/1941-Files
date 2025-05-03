@@ -136,6 +136,14 @@ li:hover {
     background-color: #3261E2;
 }
 
+/* li * {
+    white-space: nowrap;
+    text-overflow: clip;
+    display: block;
+    width: 100%;
+    text-align: center;
+} */
+
 .copy-btn {
     position: absolute;
     top: 0;
