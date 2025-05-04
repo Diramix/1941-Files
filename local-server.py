@@ -2,28 +2,35 @@ from flask import Flask, send_from_directory, render_template, request, jsonify,
 import os
 import json
 
+# Пути к файлам
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(BASE_DIR, 'control/config.json')
+USERS_PATH = os.path.join(BASE_DIR, 'control/users.json')
+WHITELIST_PATH = os.path.join(BASE_DIR, 'control/ip-whitelist.txt')
+BANLIST_PATH = os.path.join(BASE_DIR, 'control/ip-banlist.txt')
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 def load_config():
-    with open('config.json', 'r') as config_file:
+    with open(CONFIG_PATH, 'r') as config_file:
         return json.load(config_file)
 
 def load_users():
-    if os.path.exists('users.json'):
-        with open('users.json', 'r') as f:
+    if os.path.exists(USERS_PATH):
+        with open(USERS_PATH, 'r') as f:
             return json.load(f)
     return {}
 
 def load_whitelisted_ips():
-    if os.path.exists('ip-whitelist.txt'):
-        with open('ip-whitelist.txt', 'r') as f:
+    if os.path.exists(WHITELIST_PATH):
+        with open(WHITELIST_PATH, 'r') as f:
             return {line.strip() for line in f.readlines()}
     return set()
 
 def load_banned_ips():
-    if os.path.exists('ip-banlist.txt'):
-        with open('ip-banlist.txt', 'r') as f:
+    if os.path.exists(BANLIST_PATH):
+        with open(BANLIST_PATH, 'r') as f:
             return {line.strip() for line in f.readlines()}
     return set()
 
@@ -36,26 +43,21 @@ if not os.path.exists(DIRECTORY):
     os.makedirs(DIRECTORY)
     print(f"Directory '{DIRECTORY}' created.")
 
-# Функция для проверки заблокирован ли IP
 def is_banned_ip(user_ip):
     banned_ips = load_banned_ips()
     return user_ip in banned_ips
 
-# Декоратор для проверки авторизации, с добавлением проверки заблокированных IP
 def login_required(f):
     def wrapped(*args, **kwargs):
         user_ip = request.remote_addr
 
-        # Если IP заблокирован, перенаправляем на страницу /banned
         if is_banned_ip(user_ip):
             return redirect(url_for('banned'))
 
-        # Если IP в белом списке, пропускаем без авторизации
         whitelisted_ips = load_whitelisted_ips()
         if user_ip in whitelisted_ips:
             return f(*args, **kwargs)
 
-        # Если пользователь не авторизован, перенаправляем на страницу логина
         if 'username' not in session:
             return redirect(url_for('login'))
 
@@ -103,13 +105,11 @@ def upload_file():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    # Если пользователь уже авторизован, перенаправляем на главную страницу или другую
     if 'username' in session:
-        return redirect(url_for('list_files'))  # Можно заменить на любую другую страницу
+        return redirect(url_for('list_files'))
 
     user_ip = request.remote_addr
 
-    # Если IP заблокирован, перенаправляем на страницу /banned
     if is_banned_ip(user_ip):
         return redirect(url_for('banned'))
 
@@ -144,18 +144,15 @@ def banned():
     user_ip = request.remote_addr
     users = load_users()
 
-    # Если IP заблокирован или пользователь заблокирован
     if is_banned_ip(user_ip):
         return render_template("ban.html")
     
-    # Также проверяем, если пользователь в бане
     if 'username' in session:
         username = session['username']
         user_data = users.get(username)
         if isinstance(user_data, dict) and user_data.get("ban") is True:
             return render_template("ban.html")
 
-    # Если пользователь не заблокирован, перенаправляем на страницу логина
     return redirect(url_for('login'))
 
 if __name__ == "__main__":
