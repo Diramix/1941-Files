@@ -78,3 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.querySelectorAll('.file-button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        if (e.target.closest('.copy-btn')) return;
+        const url = this.dataset.url;
+        window.open(url, '_blank');
+    });
+});
