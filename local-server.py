@@ -78,7 +78,7 @@ def login_required(f):
 def list_files():
     files = os.listdir(DIRECTORY)
     files = [f for f in files if os.path.isfile(os.path.join(DIRECTORY, f))]
-    return render_template("index.html", files=files)
+    return render_template("files.html", files=files)
 
 @app.route("/<filename>")
 @login_required
