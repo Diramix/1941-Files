@@ -1,3 +1,10 @@
 {
-    "admin": "admin"
+    "admin": {
+        "password": "admin",
+        "ban": false
+    },
+    "ban": {
+        "password": "ban",
+        "ban": true
+    }
 }
