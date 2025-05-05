@@ -1,4 +1,5 @@
 {
+    "nosecure": false,
     "port": 1941,
     "directory": "%LOCALAPPDATA%\\local-server"
 }
