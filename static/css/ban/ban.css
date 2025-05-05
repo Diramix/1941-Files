@@ -1,11 +1,3 @@
-:root {
-    --main-background: #16181E;
-    --light-element: #292C36;
-    --dropxout: #181B21;
-    --button-bg: #3E424C;
-    --progress-bar: #42F693;
-}
-
 * {
     box-sizing: border-box;
 }
