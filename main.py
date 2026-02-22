@@ -20,6 +20,7 @@ CONFIG_PATH = BASE_DIR / "control" / "config.json"
 USERS_PATH = BASE_DIR / "control" / "users.json"
 WHITELIST_PATH = BASE_DIR / "control" / "ip-whitelist.txt"
 BANLIST_PATH = BASE_DIR / "control" / "ip-banlist.txt"
+FILES_FOLDER_NAME = "1941 Files"
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -46,7 +47,7 @@ def load_config() -> dict:
 
 def resolve_directory(raw: str) -> Path:
     if raw.strip() == "{home}":
-        return Path(user_data_dir("local-server", appauthor=False))
+        return Path(user_data_dir(FILES_FOLDER_NAME, appauthor=False))
     return Path(os.path.expandvars(raw)).resolve()
 
 
